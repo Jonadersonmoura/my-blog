@@ -1,0 +1,21 @@
+<div class="container">
+    <mat-card class="card-login">
+        <h1 class="text-center">My Blog</h1>
+        <h2 class="text-center">Login</h2>
+        <div class="form-content">
+            <form [formGroup]="formLogin" (ngSubmit)="logar()">
+                <mat-form-field class="width-full" appearance="outline">
+                    <mat-label>Usuário</mat-label>
+                    <input matInput type="text" placeholder="usuario@empresa.com.br" formControlName="usuario">
+                    <mat-error *ngIf="formLogin.controls['usuario'].invalid">Email Inválido!!!</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="width-full" appearance="outline">
+                    <mat-label>Senha</mat-label>
+                    <input matInput type="password" placeholder="******" formControlName="senha">
+                </mat-form-field>
+                <button class="btn-login" type="submit" mat-raised-button color="primary" [disabled]="!formLogin.valid">Entrar</button>
+            </form>
+        </div>
+    </mat-card>
+</div>
