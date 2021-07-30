@@ -1,0 +1,19 @@
+.content-toolbar {
+    box-shadow: 0 1px 5px 0px #888585;
+    margin: 0;
+    .container {
+        width: 1366px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 40px;
+            height: 40px;
+        }
+        .title {
+            color: #4e4e54;
+            margin-left: 1rem;
+        }
+    }
+}
