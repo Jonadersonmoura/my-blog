@@ -55,7 +55,7 @@ export class PostsComponent implements OnInit {
   }
 
   editarPost(id: number) {
-    console.log(id)
+    this.router.navigate([`edit-post/${id}`])
   }
 
   removerPost(id: number) {

@@ -28,6 +28,11 @@ const routes: Routes = [
         path: 'new-post',
         component: NewPostComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'edit-post/:id',
+        component: NewPostComponent,
+        canActivate: [AuthGuard]
       }
     ]
   }

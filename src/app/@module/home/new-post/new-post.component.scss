@@ -1,0 +1,13 @@
+.form-receita {
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        @media (min-width: 1366px) {
+            width: 80%;
+        }
+        .btn-save {
+            width: 150px;
+        }
+    }
+}

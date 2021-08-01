@@ -1,1 +1,21 @@
-<p>new-post works!</p>
+<h1>{{ idReceita || idReceita !== undefined ? 'Editar' : 'Cadastrar nova'}} receita</h1>
+<div class="form-receita">
+    <form [formGroup]="formCadastrar">
+        <mat-form-field appearance="outline">
+            <mat-label>*Título da Receita</mat-label>
+            <input matInput formControlName="titulo">
+            <mat-error *ngIf="formCadastrar.controls['titulo'].invalid">Título obrigatório</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>*Imagem</mat-label>
+            <input matInput placeholder="Insira a url da imagem aqui..." formControlName="imagem">
+            <mat-error *ngIf="formCadastrar.controls['imagem'].invalid">Imagem obrigatória</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>*Receita</mat-label>
+            <textarea matInput rows="30" formControlName="receita"></textarea>
+            <mat-error *ngIf="formCadastrar.controls['receita'].invalid">Receita obrigatória</mat-error>
+        </mat-form-field>
+        <button class="btn-save" mat-raised-button color="primary" [disabled]="!formCadastrar.valid">Salvar</button>
+    </form>
+</div>

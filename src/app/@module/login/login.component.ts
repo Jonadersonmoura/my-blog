@@ -9,13 +9,15 @@ import { AuthService } from 'src/app/@core/authentication/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  formLogin = this.fb.group({
-    usuario: [null, [Validators.required, Validators.email]],
-    senha: [null, [Validators.required]]
-  })
+  formLogin;
 
   constructor(private fb: FormBuilder,
-    private authService: AuthService) { }
+    private authService: AuthService) {
+    this.formLogin = this.fb.group({
+      usuario: [null, [Validators.required, Validators.email]],
+      senha: [null, [Validators.required]]
+    })
+  }
 
   ngOnInit(): void {
 
