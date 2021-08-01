@@ -1,7 +1,15 @@
 .container {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    height: 240px;
+    grid-template-rows: 1fr 1fr;
+    height: auto;
+    @media (min-width: 768px) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 0fr 0fr;
+    }
+    @media (min-width: 1024px) {
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 0fr 0fr;
+    }
     .text {
         display: flex;
         flex-direction: column;
@@ -28,7 +36,10 @@
         justify-content: center;
         align-items: center;
         img {
-            width: 350px;
+            width: 100%;
+            @media (min-width: 768px) {
+                width: 350px;
+            }
         }
     }
 }

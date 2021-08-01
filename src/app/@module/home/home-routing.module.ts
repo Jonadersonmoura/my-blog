@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/@core/authentication/auth.guards';
 import { HomeComponent } from './home.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { PostComponent } from './post/post.component';
@@ -11,6 +12,11 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'posts',
+        pathMatch: 'full'
+      },
+      {
         path: 'posts',
         component: PostsComponent
       },
@@ -20,7 +26,8 @@ const routes: Routes = [
       },
       {
         path: 'new-post',
-        component: NewPostComponent
+        component: NewPostComponent,
+        canActivate: [AuthGuard]
       }
     ]
   }

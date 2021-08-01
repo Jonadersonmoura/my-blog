@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/@core/authentication/auth.service';
 
 @Component({
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
+
+  logado: boolean = false;
 
   posts = [
     {
@@ -37,12 +41,24 @@ export class PostsComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(private router: Router,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.loggedIn$.subscribe(response => {
+      this.logado = response;
+    })
   }
 
   detalhereceita(id: number) {
+    this.router.navigate([`post/${id}`])
+  }
+
+  editarPost(id: number) {
+    console.log(id)
+  }
+
+  removerPost(id: number) {
     console.log(id)
   }
 

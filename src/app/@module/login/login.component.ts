@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
   }
 
   logar() {
-    console.log(this.formLogin)
     this.authService.login(this.formLogin.value)
   }
 

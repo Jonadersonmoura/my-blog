@@ -4,8 +4,8 @@
         <section>
             <router-outlet></router-outlet>
         </section>
-        <aside>
-            <h1>About</h1>
+        <aside [ngClass]="{ 'opened': opened }">
+            <app-about></app-about>
         </aside>
     </div>
 </main>

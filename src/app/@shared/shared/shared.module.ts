@@ -8,6 +8,8 @@ import { CardPostComponent } from '../card-post/card-post.component';
 
 // Material Module
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon'
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   ],
   imports: [
     CommonModule,
-    MatToolbarModule
+    RouterModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   exports: [
     NavbarComponent,

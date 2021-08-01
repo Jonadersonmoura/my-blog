@@ -7,6 +7,14 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        .menu {
+            position: absolute;
+            left: 1rem;
+            display: flex;
+            @media (min-width: 1366px) {
+                display: none;
+            }
+        }
         img {
             width: 40px;
             height: 40px;

@@ -1,1 +1,17 @@
-<p>about works!</p>
+<div class="container">
+    <span class="menu" (click)="closeMenu()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" color="white">cancel</mat-icon>
+    </span>
+    <div class="profile">
+        <h1>Rodrigo Oliveira</h1>
+        <img src="../../../assets/img/rodrigo-oliveira.jpg" alt="chef de cozinha">
+        <p>
+            Rodrigo Oliveira nasceu em 1980. É filho de pernambucanos e cozinheiro. Desde os treze anos, ia à casa do norte do pai para ajudá-lo e pegou gosto pela coisa. Cursou Gastronomia e desde 2001 está à frente do restaurante que conta a história da sua família,
+            o Mocotó. </p>
+    </div>
+    <div class="actions">
+        <button routerLink="/posts" (click)="closeMenu()">Receitas</button>
+        <button routerLink="/new-post" (click)="closeMenu()" *ngIf="logado">Nova Receita</button>
+    </div>
+    <button class="btn-logar" (click)="logar()">{{ !logado ? 'Logar' : 'Sair'}}</button>
+</div>

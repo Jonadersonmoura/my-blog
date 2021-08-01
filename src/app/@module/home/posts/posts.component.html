@@ -1,7 +1,15 @@
 <div class="posts" *ngFor="let item of posts">
     <app-card-post title="{{item.title}}" date="{{item.date}}" receita="{{item.receita}}" imagem="{{item.imagem}}">
     </app-card-post>
-    <button (click)="detalhereceita(item.id)">
-    Veja toda receita...
-    </button>
+    <div class="btn-group">
+        <button (click)="detalhereceita(item.id)">
+            Veja toda receita...
+        </button>
+        <button *ngIf="logado" (click)="editarPost(item.id)">
+            Editar Receita
+        </button>
+        <button *ngIf="logado" (click)="removerPost(item.id)">
+            Remover Receita
+        </button>
+    </div>
 </div>
