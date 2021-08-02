@@ -16,4 +16,53 @@
         line-height: 36px;
         font-size: 20px;
     }
+    .comments {
+        background: #e6e5e2;
+        padding: 10px;
+        .new-comments {
+            display: flex;
+            flex-direction: column;
+            width: calc(100% - 30px);
+            background: #ffffff;
+            margin-bottom: 1rem;
+            padding: 15px;
+            .input-text {
+                width: 40%;
+            }
+            .btn-save {
+                width: 20%;
+            }
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0 20px;
+            height: auto;
+            max-height: 200px;
+            overflow-y: auto;
+            &::-webkit-scrollbar {
+                width: 6px;
+                height: 6px;
+            }
+            &::-webkit-scrollbar-button:start:decrement,
+            &::-webkit-scrollbar-button:end:increment {
+                display: none;
+            }
+            &::-webkit-scrollbar-track-piece {
+                border-radius: 6px;
+            }
+            &::-webkit-scrollbar-thumb:vertical {
+                background-color: rgba(25, 109, 91, 0.5);
+                border-radius: 6px;
+            }
+            li {
+                display: flex;
+                flex-direction: column;
+                .profile {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
 }

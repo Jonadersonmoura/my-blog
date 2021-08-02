@@ -5,6 +5,7 @@
         <p>{{receita}}</p>
     </div>
     <div class="imagem">
-        <img src="{{imagem}}" alt="{{title}}">
+        <img *ngIf="imagem !== undefined" src="{{imagem}}" alt="{{title}}">
+        <img *ngIf="!imagem || imagem === undefined" src="https://ajuda.skyhub.com.br/hc/user_images/AWSHfJIJOFSaS_2piM4DQw.jpeg" alt="sem imagem">
     </div>
 </div>

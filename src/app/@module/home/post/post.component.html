@@ -1,12 +1,39 @@
 <div class="container">
     <h1>
-        {{ title }}
+        {{ post?.titulo }}
     </h1>
 
-    <img src="{{ imagem }}" alt="{{ title }}">
+    <img src="{{ post?.imagem }}" alt="{{ post?.titulo }}">
     <h6>
-        {{ date }}
+        {{ convertDate(post?.date) }}
     </h6>
-    <p [innerHtml]="receita">
+    <p [innerHtml]="post?.receita">
     </p>
+
+    <div class="comments">
+        <h3>Novo comentário</h3>
+        <form class="new-comments" [formGroup]="formComentarios" (ngSubmit)="save()">
+            <mat-form-field class="input-text" appearance="outline">
+                <mat-label>*Nome</mat-label>
+                <input matInput formControlName="nome">
+                <mat-error *ngIf="formComentarios.controls['nome'].invalid">Nome Obrigatório</mat-error>
+            </mat-form-field>
+            <mat-form-field class="text-area" appearance="outline">
+                <mat-label>*Comentário</mat-label>
+                <textarea matInput rows="3" formControlName="comentario"></textarea>
+                <mat-error *ngIf="formComentarios.controls['comentario'].invalid">Comentário obrigatório</mat-error>
+            </mat-form-field>
+            <button class="btn-save" mat-raised-button color="primary" [disabled]="!formComentarios.valid">Enviar Comentário</button>
+        </form>
+        <h3>Comentários</h3>
+        <ul>
+            <li *ngFor="let item of comments">
+                <div class="profile">
+                    <strong>{{ item.nome }}</strong>
+                    <small>{{ convertDate(item.date)}}</small>
+                </div>
+                <p>{{ item.comentario }}</p>
+            </li>
+        </ul>
+    </div>
 </div>

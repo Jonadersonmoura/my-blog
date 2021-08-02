@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/@core/authentication/auth.service';
+import { PostsService } from 'src/app/@core/service-http/posts.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogConfirmComponent } from './dialog-confirm.component';
 
 @Component({
   templateUrl: './posts.component.html',
@@ -10,44 +13,34 @@ export class PostsComponent implements OnInit {
 
   logado: boolean = false;
 
-  posts = [
-    {
-      id: 1,
-      title: 'Feijão tropeiro',
-      date: '30 de Agosto de 2021',
-      receita: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-      imagem: 'https://simplelivingrecipes.com/wp-content/uploads/2019/06/Feijao-Tropeiro-1.jpeg'
-    },
-    {
-      id: 2,
-      title: 'Feijão tropeiro',
-      date: '30 de Agosto de 2021',
-      receita: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-      imagem: 'https://simplelivingrecipes.com/wp-content/uploads/2019/06/Feijao-Tropeiro-1.jpeg'
-    },
-    {
-      id: 3,
-      title: 'Feijão tropeiro',
-      date: '30 de Agosto de 2021',
-      receita: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-      imagem: 'https://simplelivingrecipes.com/wp-content/uploads/2019/06/Feijao-Tropeiro-1.jpeg'
-    },
-    {
-      id: 4,
-      title: 'Feijão tropeiro',
-      date: '30 de Agosto de 2021',
-      receita: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-      imagem: 'https://simplelivingrecipes.com/wp-content/uploads/2019/06/Feijao-Tropeiro-1.jpeg'
-    }
-  ]
+  posts: any;
 
   constructor(private router: Router,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private postsService: PostsService,
+    private matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.authService.loggedIn$.subscribe(response => {
       this.logado = response;
     })
+
+    this.postsService.getPosts().subscribe(response => {
+      this.posts = response.map((item: any) => {
+        return {
+          id: item.payload.doc.id,
+          titulo: item.payload.doc.data()['titulo'],
+          imagem: item.payload.doc.data()['imagem'],
+          receita: item.payload.doc.data()['receita'],
+          date: this.convertDate(item.payload.doc.data()['date'])
+        }
+      })
+    });
+  }
+
+  convertDate(date: any) {
+    const newDate = new Date(date)
+    return newDate.toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
   }
 
   detalhereceita(id: number) {
@@ -58,8 +51,14 @@ export class PostsComponent implements OnInit {
     this.router.navigate([`edit-post/${id}`])
   }
 
-  removerPost(id: number) {
-    console.log(id)
+  removerPost(id: string, titulo: string) {
+    const dialog = this.matDialog.open(DialogConfirmComponent, {
+      data: {
+        id: id,
+        titulo: titulo
+      }
+    })
+
   }
 
 }
