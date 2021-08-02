@@ -19,13 +19,14 @@ export class AuthService {
     }
 
     login(user: any) {
-
         if (user.usuario === 'usuario@empresa.com.br' && user.senha === 'senha01') {
             this.loggedIn.next(true);
             this.router.navigate(['']);
             this.menuService.setMenu(false);
         } else {
-            this._snackBar.open('Usuário ou Senha Inválidos', 'fechar')
+            this._snackBar.open('Usuário ou Senha Inválidos', 'fechar', {
+                duration: 5000
+            })
         }
     }
 

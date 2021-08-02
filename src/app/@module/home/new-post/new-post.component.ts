@@ -42,10 +42,21 @@ export class NewPostComponent implements OnInit {
     this.formCadastrar.controls.date.setValue(new Date().toString())
     if (this.idReceita) {
       this.postsService.editPost(this.idReceita, this.formCadastrar.value)
+        .then(() => {
+          this._snackBar.open(`Receita ${this.formCadastrar.controls.titulo.value} adicionada com sucesso!`, 'fechar', {
+            duration: 5000
+          })
+          this.formCadastrar.reset()
+          this.formCadastrar.controls.titulo.setErrors(null)
+          this.formCadastrar.controls.imagem.setErrors(null)
+          this.formCadastrar.controls.receita.setErrors(null)
+        })
     } else {
       this.postsService.newPost(this.formCadastrar.value)
         .then(() => {
-          this._snackBar.open(`Receita ${this.formCadastrar.controls.titulo.value} adicionada com sucesso!`, 'fechar')
+          this._snackBar.open(`Receita ${this.formCadastrar.controls.titulo.value} adicionada com sucesso!`, 'fechar', {
+            duration: 5000
+          })
           this.formCadastrar.reset()
           this.formCadastrar.controls.titulo.setErrors(null)
           this.formCadastrar.controls.imagem.setErrors(null)

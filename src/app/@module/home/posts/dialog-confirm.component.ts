@@ -28,7 +28,9 @@ export class DialogConfirmComponent {
   removePost() {
     const messeger = `${this.data.titulo} apagado com Sucesso!`
     this.postsService.deletePost(this.data.id).then(() => {
-      this._snackBar.open(messeger, 'fechar')
+      this._snackBar.open(messeger, 'fechar', {
+        duration: 5000
+      })
     })
   }
 }

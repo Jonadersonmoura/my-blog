@@ -26,8 +26,8 @@ export class PostsService {
     return this.firestore.collection('posts').add(post)
   }
 
-  editPost(postId: string, post: any) {
-    this.firestore.doc('posts/' + postId).update(post);
+  editPost(postId: string, post: any): Promise<any> {
+    return this.firestore.doc('posts/' + postId).update(post);
   }
 
   editPostComment(postId: string, post: any): Promise<any> {
